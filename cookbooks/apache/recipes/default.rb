@@ -7,6 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe 'apache::ohai_plugin'
+
 package "httpd" do
   action :install
 end
