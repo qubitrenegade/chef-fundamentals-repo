@@ -20,3 +20,8 @@ end
 service "httpd" do
   action [ :enable, :start ]
 end
+
+apache_vhost "clowns" do
+  action :remove
+  notifies :restart, "service[httpd]"
+end

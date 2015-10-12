@@ -1,9 +1,10 @@
 use_inline_resources
 
-# set document root
-document_root = "/srv/apache/#{new_resource.site_name}"
 
 action :create do
+  # set document root
+  document_root = "/srv/apache/#{new_resource.site_name}"
+
   # Add template for Apache virtual host config
   template "/etc/httpd/conf.d/#{new_resource.site_name}.conf" do
     source 'custom.erb'
@@ -31,12 +32,15 @@ action :create do
 end
 
 action :remove do
+  # set document root
+  document_root = "/srv/apache/#{new_resource.site_name}"
+
   directory document_root do
     action :delete
     recursive true
   end
 
-  file "/etc/httpd/conf.d/#{new_resource.site_name}.conf"
+  file "/etc/httpd/conf.d/#{new_resource.site_name}.conf" do
     action :delete
   end
 end
