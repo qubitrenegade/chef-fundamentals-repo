@@ -1,15 +1,15 @@
 use_inline_resources
 
-action :create do
-  # set document root
-  document_root = "/srv/apache/#{new_resources.site_name}"
+# set document root
+document_root = "/srv/apache/#{new_resource.site_name}"
 
+action :create do
   # Add template for Apache virtual host config
   template "/etc/httpd/conf.d/#{new_resource.site_name}.conf" do
     source 'custom.erb'
     mode '0644'
     variables(
-      :document_root => document_root
+      :document_root => document_root,
       :port => new_resource.site_port
     )
   end
@@ -28,4 +28,15 @@ action :create do
     )
   end
 
+end
+
+action :remove do
+  directory document_root do
+    action :delete
+    recursive true
+  end
+
+  file "/etc/httpd/conf.d/#{new_resource.site_name}.conf"
+    action :delete
+  end
 end
