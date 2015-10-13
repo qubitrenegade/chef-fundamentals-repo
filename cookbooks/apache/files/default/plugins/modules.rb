@@ -1,5 +1,5 @@
 Ohai.plugin(:Apache) do
-  provides "apache/modules"
+  provides 'apache/modules'
 
   collect_data(:default) do
     apache Mash.new
