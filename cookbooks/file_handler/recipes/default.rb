@@ -6,7 +6,7 @@
 
 include_recipe 'chef_handler'
 
-cookbook_file "#{node['chef_handler']['handler_path']}/file_handler.rb' do
+cookbook_file "#{node['chef_handler']['handler_path']}/file_handler.rb" do
   source 'file_handler.rb'
   owner 'root'
   group 'root'
